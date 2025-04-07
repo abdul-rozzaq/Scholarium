@@ -8,7 +8,7 @@ env = Env()
 env.read_env()
 
 
-SECRET_KEY = env.str("DEBUG")
+SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG", default=False)
 
