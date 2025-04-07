@@ -108,6 +108,7 @@ USE_TZ = True
 
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static_files"
 
 AUTH_USER_MODEL = "crm.User"
 
