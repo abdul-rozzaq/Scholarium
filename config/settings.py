@@ -11,10 +11,12 @@ env.read_env()
 SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG", default=False)
-
+APPEND_SLASH = False
 ALLOWED_HOSTS = ["*"]
 
 SITE_ID = 1
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -24,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # External apps
+    "corsheaders",
     "rest_framework",
     "django.contrib.sites",
     "django_extensions",
@@ -35,6 +38,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -113,3 +117,7 @@ STATIC_ROOT = BASE_DIR / "static_files"
 AUTH_USER_MODEL = "crm.User"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+if DEBUG:
+    MIDDLEWARE = ["kolo.middleware.KoloMiddleware"] + MIDDLEWARE
