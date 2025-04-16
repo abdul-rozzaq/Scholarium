@@ -11,7 +11,6 @@ env.read_env()
 SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG", default=False)
-APPEND_SLASH = False
 ALLOWED_HOSTS = ["*"]
 
 SITE_ID = 1

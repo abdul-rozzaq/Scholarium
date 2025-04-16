@@ -2,8 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 
 
-
-
 class UserManager(BaseUserManager):
     def create_user(self, phone, password=None, **extra_fields):
         if not phone:
@@ -107,3 +105,12 @@ class GroupSchedule(models.Model):
 
     def __str__(self):
         return f"{self.group.name} - {self.day}"
+
+
+class Room(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    capacity = models.IntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
