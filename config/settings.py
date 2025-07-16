@@ -51,11 +51,13 @@ TENANT_DOMAIN_MODEL = "schools.Domain"
 
 DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MIDDLEWARE = [
     "django_tenants.middleware.main.TenantMainMiddleware",
     "apps.common.middlewares.TenantOnlyMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
