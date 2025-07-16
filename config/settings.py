@@ -1,6 +1,7 @@
 from pathlib import Path
 from environs import Env
 
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,31 +11,50 @@ env.read_env()
 
 SECRET_KEY = env.str("SECRET_KEY")
 
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = True  # env.bool("DEBUG", default=False)
 ALLOWED_HOSTS = ["*"]
 
-SITE_ID = 1
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-INSTALLED_APPS = [
-    "django.contrib.admin",
+
+SHARED_APPS = [
     "django.contrib.auth",
-    "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.contenttypes",
     # External apps
+    "django_tenants",
     "corsheaders",
     "rest_framework",
-    "django.contrib.sites",
     "django_extensions",
     "rest_framework_simplejwt",
+    "drf_yasg",
     # Internal apps
-    "crm",
+    "apps.schools",
+    "apps.users",
 ]
 
+TENANT_APPS = [
+    "django.contrib.admin",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    # Internal apps
+    "apps.courses",
+]
+
+INSTALLED_APPS = list(dict.fromkeys(SHARED_APPS + TENANT_APPS))
+
+
+TENANT_MODEL = "schools.School"
+TENANT_DOMAIN_MODEL = "schools.Domain"
+
+DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
+
+
 MIDDLEWARE = [
+    "django_tenants.middleware.main.TenantMainMiddleware",
+    "apps.common.middlewares.TenantOnlyMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -53,7 +73,21 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
+        "apps.common.permissions.TenantUserPermission",
     ],
+}
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=3),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+}
+
+
+SWAGGER_SETTINGS = {
+    "PERSIST_AUTH": True,
+    "DOC_EXPANSION": "none",
+    "DEEP_LINKING": True,
 }
 
 
@@ -79,25 +113,29 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django_tenants.postgresql_backend",
+        "NAME": env.str("DATABASE_NAME", default="scholarium_db"),
+        "USER": env.str("DATABASE_USER", default="postgres"),
+        "PASSWORD": env.str("DATABASE_PASSWORD", default="yourpassword"),
+        "HOST": env.str("DATABASE_HOST", default="localhost"),
+        "PORT": env.str("DATABASE_PORT", default="5432"),
     }
 }
 
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    # },
 ]
 
 
@@ -110,13 +148,13 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static_files"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-AUTH_USER_MODEL = "crm.User"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+AUTH_USER_MODEL = "users.User"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-if DEBUG:
-    MIDDLEWARE = ["kolo.middleware.KoloMiddleware"] + MIDDLEWARE
