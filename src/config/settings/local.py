@@ -1,4 +1,6 @@
-from .base import *  # noqa: F403
+# ruff: noqa: F405 F403
+
+from .base import *
 
 DEBUG = True
 
@@ -13,14 +15,14 @@ DATABASES = {
     }
 }
 
-INSTALLED_APPS += [  # noqa: F405
-    "django_debug_toolbar",
-    "django_silk",
+INSTALLED_APPS += [
+    # "silk",     
+    # 'query_counter',
 ]
 
-MIDDLEWARE += [  # noqa: F405
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "silk.middleware.SilkyMiddleware",
+MIDDLEWARE += [
+    # "silk.middleware.SilkyMiddleware",
+    "query_counter.middleware.DjangoQueryCounterMiddleware",
 ]
 
 INTERNAL_IPS = ["127.0.0.1"]

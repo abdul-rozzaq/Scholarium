@@ -3,25 +3,28 @@ from environs import Env
 from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-env = Env()
-env.read_env()
 
-SECRET_KEY = env.str("SECRET_KEY")
+env = Env()
+env.read_env(BASE_DIR.parent / ".envs/.env")
+
+SECRET_KEY = env.str("SECRET_KEY", "secret")
 ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 SHARED_APPS = [
+    "django_tenants",  # Must be first
     "django.contrib.auth",
+    "django.contrib.admin",
     "django.contrib.sessions",
     "django.contrib.staticfiles",
     "django.contrib.contenttypes",
-    "django_tenants",
+    # External apps
     "corsheaders",
     "rest_framework",
-    "django_extensions",
     "rest_framework_simplejwt",
     "drf_yasg",
+    # Local apps
     "apps.schools",
     "apps.users",
 ]
@@ -31,12 +34,16 @@ TENANT_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "apps.courses",
+    "apps.groups",
 ]
 
 INSTALLED_APPS = list(dict.fromkeys(SHARED_APPS + TENANT_APPS))
 
 TENANT_MODEL = "schools.School"
 TENANT_DOMAIN_MODEL = "schools.Domain"
+TENANT_COLOR_ADMIN_APPS = True
+
+
 DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -105,8 +112,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR.parent / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR.parent / "static"]
 
 AUTH_USER_MODEL = "users.User"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

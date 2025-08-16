@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Monday",
+        "name_uz": "Dushanba",
+        "code": 1
+    },
+    {
+        "name": "Tuesday",
+        "name_uz": "Seshanba",
+        "code": 2
+    },
+    {
+        "name": "Wednesday",
+        "name_uz": "Chorshanba",
+        "code": 3
+    },
+    {
+        "name": "Thursday",
+        "name_uz": "Payshanba",
+        "code": 4
+    },
+    {
+        "name": "Friday",
+        "name_uz": "Juma",
+        "code": 5
+    },
+    {
+        "name": "Saturday",
+        "name_uz": "Shanba",
+        "code": 6
+    },
+    {
+        "name": "Sunday",
+        "name_uz": "Yakshanba",
+        "code": 0
+    }
+]

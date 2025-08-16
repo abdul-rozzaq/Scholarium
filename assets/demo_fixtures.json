@@ -1,0 +1,288 @@
+[
+    {
+        "model": "schools.school",
+        "pk": 1,
+        "fields": {
+            "schema_name": "public",
+            "name": "Alpha School",
+            "created_on": "2025-08-15",
+            "telegram_bot_token": null
+        }
+    },
+    {
+        "model": "schools.school",
+        "pk": 2,
+        "fields": {
+            "schema_name": "school2",
+            "name": "Beta Academy",
+            "created_on": "2025-08-15",
+            "telegram_bot_token": null
+        }
+    },
+    {
+        "model": "schools.school",
+        "pk": 3,
+        "fields": {
+            "schema_name": "school3",
+            "name": "Gamma Institute",
+            "created_on": "2025-08-15",
+            "telegram_bot_token": null
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "phone_number": "+998900000001",
+            "full_name": "Ali Director",
+            "school": 1,
+            "role": "director",
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$600000$demo$gm2u9WnQF4f0C0jUb2Gv+H0XEZm5pQ7tZ1uVemQx0So=",
+            "last_login": null
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "phone_number": "+998900000002",
+            "full_name": "Bek Teacher",
+            "school": 1,
+            "role": "teacher",
+            "is_active": true,
+            "is_staff": false,
+            "is_superuser": false,
+            "password": "pbkdf2_sha256$600000$demo$gm2u9WnQF4f0C0jUb2Gv+H0XEZm5pQ7tZ1uVemQx0So=",
+            "last_login": null
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "phone_number": "+998900000003",
+            "full_name": "Salim Director",
+            "school": 2,
+            "role": "director",
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$600000$demo$gm2u9WnQF4f0C0jUb2Gv+H0XEZm5pQ7tZ1uVemQx0So=",
+            "last_login": null
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 4,
+        "fields": {
+            "phone_number": "+998900000004",
+            "full_name": "Dilshod Teacher",
+            "school": 2,
+            "role": "teacher",
+            "is_active": true,
+            "is_staff": false,
+            "is_superuser": false,
+            "password": "pbkdf2_sha256$600000$demo$gm2u9WnQF4f0C0jUb2Gv+H0XEZm5pQ7tZ1uVemQx0So=",
+            "last_login": null
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 5,
+        "fields": {
+            "phone_number": "+998900000005",
+            "full_name": "Karim Director",
+            "school": 3,
+            "role": "director",
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$600000$demo$gm2u9WnQF4f0C0jUb2Gv+H0XEZm5pQ7tZ1uVemQx0So=",
+            "last_login": null
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 6,
+        "fields": {
+            "phone_number": "+998900000006",
+            "full_name": "Umid Teacher",
+            "school": 3,
+            "role": "teacher",
+            "is_active": true,
+            "is_staff": false,
+            "is_superuser": false,
+            "password": "pbkdf2_sha256$600000$demo$gm2u9WnQF4f0C0jUb2Gv+H0XEZm5pQ7tZ1uVemQx0So=",
+            "last_login": null
+        }
+    },
+    {
+        "model": "courses.course",
+        "pk": 1,
+        "fields": {
+            "school": 1,
+            "name": "Mathematics",
+            "description": "Basic and advanced math",
+            "monthly_price": "250000.00",
+            "created_at": "2025-08-15T00:00:00Z",
+            "updated_at": "2025-08-15T00:00:00Z"
+        }
+    },
+    {
+        "model": "courses.course",
+        "pk": 2,
+        "fields": {
+            "school": 1,
+            "name": "Physics",
+            "description": "Physics fundamentals",
+            "monthly_price": "270000.00",
+            "created_at": "2025-08-15T00:00:00Z",
+            "updated_at": "2025-08-15T00:00:00Z"
+        }
+    },
+    {
+        "model": "courses.course",
+        "pk": 3,
+        "fields": {
+            "school": 2,
+            "name": "English",
+            "description": "English grammar and speaking",
+            "monthly_price": "300000.00",
+            "created_at": "2025-08-15T00:00:00Z",
+            "updated_at": "2025-08-15T00:00:00Z"
+        }
+    },
+    {
+        "model": "courses.course",
+        "pk": 4,
+        "fields": {
+            "school": 2,
+            "name": "Chemistry",
+            "description": "Basic chemistry",
+            "monthly_price": "280000.00",
+            "created_at": "2025-08-15T00:00:00Z",
+            "updated_at": "2025-08-15T00:00:00Z"
+        }
+    },
+    {
+        "model": "courses.course",
+        "pk": 5,
+        "fields": {
+            "school": 3,
+            "name": "Biology",
+            "description": "Life sciences",
+            "monthly_price": "260000.00",
+            "created_at": "2025-08-15T00:00:00Z",
+            "updated_at": "2025-08-15T00:00:00Z"
+        }
+    },
+    {
+        "model": "courses.course",
+        "pk": 6,
+        "fields": {
+            "school": 3,
+            "name": "History",
+            "description": "World history",
+            "monthly_price": "240000.00",
+            "created_at": "2025-08-15T00:00:00Z",
+            "updated_at": "2025-08-15T00:00:00Z"
+        }
+    },
+    {
+        "model": "groups.group",
+        "pk": 1,
+        "fields": {
+            "name": "Math Group A",
+            "course": 1,
+            "teacher": 2,
+            "schedule": {
+                "days": [
+                    "Monday",
+                    "Wednesday"
+                ],
+                "time": "15:00-17:00"
+            }
+        }
+    },
+    {
+        "model": "groups.group",
+        "pk": 2,
+        "fields": {
+            "name": "Physics Group B",
+            "course": 2,
+            "teacher": 2,
+            "schedule": {
+                "days": [
+                    "Tuesday",
+                    "Thursday"
+                ],
+                "time": "14:00-16:00"
+            }
+        }
+    },
+    {
+        "model": "groups.group",
+        "pk": 3,
+        "fields": {
+            "name": "English Morning",
+            "course": 3,
+            "teacher": 4,
+            "schedule": {
+                "days": [
+                    "Monday",
+                    "Friday"
+                ],
+                "time": "10:00-12:00"
+            }
+        }
+    },
+    {
+        "model": "groups.group",
+        "pk": 4,
+        "fields": {
+            "name": "Chemistry Lab",
+            "course": 4,
+            "teacher": 4,
+            "schedule": {
+                "days": [
+                    "Wednesday"
+                ],
+                "time": "13:00-15:00"
+            }
+        }
+    },
+    {
+        "model": "groups.group",
+        "pk": 5,
+        "fields": {
+            "name": "Biology Class",
+            "course": 5,
+            "teacher": 6,
+            "schedule": {
+                "days": [
+                    "Tuesday",
+                    "Thursday"
+                ],
+                "time": "09:00-11:00"
+            }
+        }
+    },
+    {
+        "model": "groups.group",
+        "pk": 6,
+        "fields": {
+            "name": "History Evening",
+            "course": 6,
+            "teacher": 6,
+            "schedule": {
+                "days": [
+                    "Saturday"
+                ],
+                "time": "18:00-20:00"
+            }
+        }
+    }
+]
