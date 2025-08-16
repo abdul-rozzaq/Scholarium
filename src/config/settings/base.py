@@ -41,8 +41,6 @@ INSTALLED_APPS = list(dict.fromkeys(SHARED_APPS + TENANT_APPS))
 
 TENANT_MODEL = "schools.School"
 TENANT_DOMAIN_MODEL = "schools.Domain"
-TENANT_COLOR_ADMIN_APPS = True
-
 
 DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
