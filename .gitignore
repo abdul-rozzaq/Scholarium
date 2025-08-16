@@ -294,3 +294,4 @@ pyrightconfig.json
 
 .env
 .env.local
+.env.prod

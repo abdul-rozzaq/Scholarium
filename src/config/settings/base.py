@@ -47,8 +47,10 @@ DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MIDDLEWARE = [
-    "django_tenants.middleware.main.TenantMainMiddleware",
+    # Custom Tenant middlewares
+    "apps.common.middlewares.CustomTenantMiddleware",
     "apps.common.middlewares.TenantOnlyMiddleware",
+    # Django middlewares
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -103,6 +105,19 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = []
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django_tenants.postgresql_backend",
+        "NAME": env.str("POSTGRES_DB"),
+        "USER": env.str("POSTGRES_USER"),
+        "PASSWORD": env.str("POSTGRES_PASSWORD"),
+        "HOST": env.str("POSTGRES_HOST"),
+        "PORT": env.str("POSTGRES_PORT"),
+    }
+}
+
 
 LANGUAGE_CODE = "en-gb"
 TIME_ZONE = "Asia/Tashkent"

@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+    container_name: django_app
+    command: >
+      /bin/sh -c "python src/manage.py collectstatic --noinput &&
+                  python src/manage.py migrate                 &&
+                  cd /app/src && gunicorn --workers 2 --bind 0.0.0.0:8000 config.wsgi:application"
+
+    env_file:
+      - .envs/.env
+    environment:
+      POSTGRES_HOST: db
+    volumes:
+      - ./static:/app/static
+      - ./media:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15
+    container_name: django_db
+    env_file:
+      - .envs/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
