@@ -24,3 +24,5 @@ MIDDLEWARE += [
     # "silk.middleware.SilkyMiddleware",
     "query_counter.middleware.DjangoQueryCounterMiddleware",
 ]
+
+ALLOWED_HOSTS = ["*"]

@@ -8,7 +8,6 @@ env = Env()
 env.read_env(BASE_DIR.parent / ".envs/.env")
 
 SECRET_KEY = env.str("SECRET_KEY", "secret")
-ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
